@@ -4,6 +4,14 @@ import utils
 
 
 def run(file=config.DATA_PATH, url=None, test=False, count_operations=5):
+    """
+    Запуск программы
+    Run the program
+    :param file: path to the file
+    :param url: link to the json file
+    :param test: if True, use the test file
+    :param count_operations: count of operations to display
+    """
     # Load data
     if test:
         data = utils.read_json_local(config.TEST_PATH)
@@ -11,12 +19,15 @@ def run(file=config.DATA_PATH, url=None, test=False, count_operations=5):
         data = utils.read_json_url(url)
     else:
         data = utils.read_json_local(file)
+    # Фильтр данных по статусу
     # Filter data
     data = utils.filter_data(data, 'state', 'EXECUTED')
 
+    # Сортировка данных по дате
     # Sort data
     data = utils.sort_data(data, 'date', reverse=True, limit=count_operations)
 
+    # Создание строк для отображения
     # Create lines
     lines_list = []
     for operation in data:
@@ -28,6 +39,8 @@ def run(file=config.DATA_PATH, url=None, test=False, count_operations=5):
         to_ = operation.get('to', '')
         # for line 3
         operation_amount = operation.get('operationAmount')
+        # проверка на словарь чтобы вложенность проверить
+        # check if it is a dictionary
         if isinstance(operation_amount, dict):
             amount_ = operation_amount.get('amount')
             if isinstance(operation_amount.get('currency'), dict):
