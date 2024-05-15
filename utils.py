@@ -14,8 +14,8 @@ def read_json_local(path: str) -> list:
     :param path: string path to the file
     :return: list[Dictionaries]
     """
-    with open(path, 'r') as file:
-        data = json.load(file, encoding='utf-8')
+    with open(path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
     return data
 
 
@@ -28,7 +28,7 @@ def read_json_url(url: str) -> list:
     """
     response = requests.get(url)
     json_data = response.json()
-    data = json.loads(json_data, encoding='utf-8')
+    data = json.loads(json_data)
     return data
 
 
@@ -69,7 +69,7 @@ def convert_date(date: str, format_to="%d.%m.%Y") -> datetime:
     :param date: string date
     :return: string date
     """
-    return datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f").strftime(format_to)
+    return datetime.datetime.fromisoformat(date).strftime(format_to)
 
 
 # Split type and number
@@ -112,5 +112,3 @@ def regroup_string(string: str, n: int) -> str:
     :return:
     """
     return ' '.join([string[i:i + n] for i in range(0, len(string), n)])
-
-
