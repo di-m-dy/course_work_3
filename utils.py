@@ -1,10 +1,11 @@
 # Description: Utility functions for the application
-import requests
-
 import json
 from datetime import datetime
 import datetime
 import re
+
+import requests
+import urllib3
 
 
 # Read local json file
@@ -26,9 +27,8 @@ def read_json_url(url: str) -> list:
     :param url: string URL to the file
     :return: list[Dictionaries]
     """
-    response = requests.get(url)
-    json_data = response.json()
-    data = json.loads(json_data)
+    urllib3.disable_warnings()
+    data = requests.get(url, verify=False).json()
     return data
 
 

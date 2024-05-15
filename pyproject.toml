@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "^2.31.0"
+urllib3 = "^2.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
