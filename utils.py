@@ -1,6 +1,10 @@
 # Description: Utility functions for the application
-import json
 import requests
+
+import json
+from datetime import datetime
+import datetime
+import re
 
 
 # Read local json file
@@ -57,16 +61,56 @@ def sort_data(data, key, reverse=False, limit=None):
     return new_data
 
 
-# Print data
-def print_data(data):
+# Convert date to needs format
+def convert_date(date: str, format_to="%d.%m.%Y") -> datetime:
     """
-    Refers to the data and prints it:
+    Convert date to needs format
+    :param format_to:
+    :param date: string date
+    :return: string date
+    """
+    return datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f").strftime(format_to)
 
-        <date: 14.10.2018> <description>
-        <from: "Visa Platinum 7000 79** **** 6361"> -> <to: "Счет **9638">
-        <operationAmount[amount]> <currency[name]>
-б.
 
-    :param data:
+# Split type and number
+def split_type_number(string: str) -> dict:
+    """
+    Split type and number
+    :param string:
     :return:
     """
+    pattern = r"(\D+) (\d+)"
+    match = re.search(pattern, string)
+    if match:
+        type_ = match.group(1).strip()
+        number_ = match.group(2).strip()
+        return {'type': type_, 'number': number_}
+    # return {}
+
+
+# Set private string
+def set_private_string(string: str, area_start: int, area_end: int) -> str:
+    """
+    Set private string
+    :param string:
+    :param area_start:
+    :param area_end:
+    :return:
+    """
+    private_area = string[area_start:area_end]
+    return string.replace(private_area, '*' * len(private_area))
+
+# ru: разбиение строки на группы по n символов
+# en: split string into groups of n characters
+
+
+def regroup_string(string: str, n: int) -> str:
+    """
+    regroup string into groups of n characters
+    :param string:
+    :param n:
+    :return:
+    """
+    return ' '.join([string[i:i + n] for i in range(0, len(string), n)])
+
+
