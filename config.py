@@ -3,7 +3,7 @@ import os
 
 # Path to the data file
 DATA_PATH = os.path.join(os.path.dirname(__file__), 'secrets/operations.json')
-TEST_PATH = os.path.join(os.path.dirname(__file__), 'tests/test_operations.json')
+TEST_PATH = os.path.join(os.path.dirname(__file__), 'tests/data_test')
 FILTER_KEY = 'state'
-STATUS = 'CANCELED'
-LIMIT_OPERATIONS = -1
+STATUS = 'EXECUTED'
+LIMIT_OPERATIONS = 10

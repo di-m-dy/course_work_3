@@ -50,7 +50,7 @@ class Operation:
         return data_dict
 
     @staticmethod
-    def get_type_number(string) -> dict:
+    def get_type_number(string) -> Optional[dict]:
         """
         en: Get type and number
         ru: Получить тип и номер
@@ -76,10 +76,8 @@ class Operation:
         :return:
         """
         if type_.startswith('Счет'):
-            private_area = string[-4:]
-            return string.replace(private_area, '*' * len(private_area))
-        private_area = string[7:-4]
-        string = string.replace(private_area, '*' * len(private_area))
+            return f"{string[:-4]}****"
+        string = f"{string[:6]}******{string[12:]}"
         return ' '.join([string[i:i + 4] for i in range(0, len(string), 4)])
 
     def __str__(self) -> str:

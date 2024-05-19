@@ -18,7 +18,7 @@ def read_json_local(path: str) -> list:
 
 
 # Filter data by key
-def filter_data(data: list[Operation], key: str, value: str) -> list:
+def filter_data(data: list[Operation], key: str, value: str) -> list[Operation]:
     """
     Filter data by key
     :param data: list of dictionaries
