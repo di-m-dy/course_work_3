@@ -61,8 +61,10 @@ class Operation:
         if match:
             type_ = match.group(1).strip()
             number_ = match.group(2).strip()
-            return {'type': type_, 'number': number_}
-        return {}
+            return {
+                'type': type_ if type_ else '',
+                'number': number_ if number_ else ''}
+        return None
 
     @staticmethod
     def number_repr(type_, string) -> str:
@@ -80,7 +82,6 @@ class Operation:
         string = string.replace(private_area, '*' * len(private_area))
         return ' '.join([string[i:i + 4] for i in range(0, len(string), 4)])
 
-
     def __str__(self) -> str:
         """
         en: String representation of the object
@@ -90,11 +91,13 @@ class Operation:
         data = self.get_operation()
         date = data['date'].strftime("%d.%m.%Y") if data['date'] else 'No date'
         description = data['description'] if data['description'] else 'No description'
-        from_number = self.number_repr(data['from']['type'], data['from']['number'])
+        #
+        from_number = self.number_repr(data['from']['type'], data['from']['number']) if data['from'] else ''
         from_ = f"{data['from']['type']} {from_number}" if data['from'] else ''
-        to_number = self.number_repr(data['to']['type'], data['to']['number'])
+        to_number = self.number_repr(data['to']['type'], data['to']['number']) if data['to'] else ''
         to = f"{data['to']['type']} {to_number}" if data['to'] else ''
         delimiter = ' -> ' if (from_ and to) else ''
+        #
         amount = data['amount'] if data['amount'] else 'No amount'
         currency_name = data['currency_name'] if data['currency_name'] else 'No currency'
         # create lines
