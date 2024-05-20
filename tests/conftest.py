@@ -1,16 +1,17 @@
 """
 en: Module for fixture
+ru: Модуль для фикстур
 """
 import pytest
-import datetime
+
 from transaction import Operation
 
 
 @pytest.fixture
 def fx_data_all():
     """
-    data from test_data.json
-    :return: list of dictionaries with different states and dates
+    en: data from test_data.json
+    ru: данные из test_data.json
     """
     return [
         {
@@ -85,6 +86,10 @@ def fx_data_all():
 
 @pytest.fixture
 def fx_list_operations():
+    """
+    en: list of Operation
+    ru: список Operation
+    """
     op_1 = Operation(
         state="EXECUTED",
         date="2000-01-01",
@@ -124,8 +129,13 @@ def fx_list_operations():
 
     return [op_1, op_2, op_3, op_4]
 
+
 @pytest.fixture
 def fx_canceled_operations():
+    """
+    en: list of Operation with state CANCELED
+    ru: список Operation со статусом CANCELED
+    """
     op_4 = Operation(
         state="CANCELED",
         date="2004-01-01",
@@ -139,69 +149,60 @@ def fx_canceled_operations():
 
 
 @pytest.fixture
-def op_get_operation():
-    return [
-        {
-            'state': "EXECUTED",
-            'date': datetime.datetime(2000, 1, 1),
-            'description': "Test_Description_1",
-            'from': {
-                'type': "Card_From",
-                'number': "0000000000000000"
-            },
-            'to': {
-                'type': "Card_To",
-                'number': "0000000000000000"
-            },
-            'amount': "0.0",
-            'currency_name': "Test_Name_Currency"
-        },
-{
-            'state': "EXECUTED",
-            'date': datetime.datetime(2002, 1, 1),
-            'description': "Test_Description_2",
-            'from': {
-                'type': "Card_From",
-                'number': "0000000000000000"
-            },
-            'to': {
-                'type': "Счет_To",
-                'number': "00000000000000000000"
-            },
-            'amount': "0.0",
-            'currency_name': "Test_Name_Currency"
-        },
-        {
-            'state': "EXECUTED",
-            'date': datetime.datetime(2001, 1, 1),
-            'description': "Test_Description_3",
-            'from': {
-                'type': "",
-                'number': ""
-            },
-            'to': {
-                'type': "Счет_To",
-                'number': "00000000000000000000"
-            },
-            'amount': "0.0",
-            'currency_name': "Test_Name_Currency"
-        },
-        {
-            'state': "CANCELED",
-            'date': datetime.datetime(2004, 1, 1),
-            'description': "Test_Description_4",
-            'from': {
-                'type': "Test_From",
-                'number': "0000000000000000"
-            },
-            'to': {
-                'type': "Test_To",
-                'number': "00000000000000000000"
-            },
-            'amount': "0.0",
-            'currency_name': "Test_Name_Currency"
-        }
-    ]
+def fx_dict_for_set_op():
+    """
+    en: dict for set_operations
+    ru: словарь для set_operations
+    """
+    dict_ = {
+        "state": "EXECUTED",
+        "date": "2000-01-01",
+        "amount": "0.0",
+        "description": "Test_Description_1",
+        "from_": "Card_From 0000000000000000",
+        "to": "Card_To 0000000000000000",
+        "currency_name": "Test_Name_Currency",
+    }
+    return dict_
 
 
+@pytest.fixture
+def fx_output_str():
+    """
+    en: output string of Operation
+    ru: строка вывода Operation
+    """
+    result = ("01.01.2000 Test_Description_1\n"
+              "Card_From 0000 00** **** 0000 -> Card_To 0000 00** **** 0000\n"
+              "0.0 Test_Name_Currency\n")
+    return result
 
+
+@pytest.fixture
+def fx_empty_dict():
+    """
+    en: empty dict for set_operations
+    ru: пустой словарь для set_operations
+    """
+    dict_ = {
+        "state": "",
+        "date": "",
+        "amount": "",
+        "description": "",
+        "from_": "",
+        "to": "",
+        "currency_name": "",
+    }
+    return dict_
+
+
+@pytest.fixture
+def fx_output_empty_str():
+    """
+    en: output string of empty Operation
+    ru: строка вывода пустой Operation
+    """
+    result = ("No date No description\n"
+              "No amount No currency\n")
+
+    return result

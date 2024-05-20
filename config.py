@@ -1,4 +1,7 @@
-# Description: Configuration file for the application
+"""
+en: Description: Configuration file for the application
+ru: Описание: Файл конфигурации для приложения
+"""
 import os
 
 # Path to the data file

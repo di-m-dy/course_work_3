@@ -2,15 +2,21 @@
 en: Module for testing the functions of the utils.py file
 ru: Модуль для тестирования функций файла utils.py
 """
-import pytest
 import json
+import os
+
+import pytest
+
+from transaction import Operation
 from utils import read_json_local, filter_data, sort_data, set_operations
 import config
-import os
-from transaction import Operation
 
 
 def test_read_json_local(fx_data_all):
+    """
+    en: Test for the reading json file
+    ru: Тест для чтения json файла
+    """
     assert read_json_local(os.path.join(config.TEST_PATH, 'test_operations.json')) == fx_data_all
     # en: if the file is empty or does not exist
     # ru: если файл пустой или не существует
@@ -19,6 +25,10 @@ def test_read_json_local(fx_data_all):
 
 
 def test_filter_data(fx_list_operations):
+    """
+    en: Test for filtering the list of Operation
+    ru: Тест для фильтрации списка Operation
+    """
     assert filter_data(fx_list_operations, 'state', 'CANCELED') == [fx_list_operations[3]]
     assert filter_data(fx_list_operations, 'state', 'EXECUTED') == [
         fx_list_operations[0],
@@ -43,6 +53,10 @@ def test_filter_data(fx_list_operations):
 
 
 def test_sort_data(fx_list_operations):
+    """
+    en: Test for sorting the list of Operation
+    ru: Тест для сортировки списка Operation
+    """
     assert sort_data(fx_list_operations, limit=3) == [
         fx_list_operations[3],
         fx_list_operations[1],
@@ -51,6 +65,10 @@ def test_sort_data(fx_list_operations):
 
 
 def test_set_operations(fx_data_all, fx_list_operations):
+    """
+    en: Test for set the list of Operation
+    ru: Тест для создания списка Operation
+    """
     assert isinstance(set_operations(fx_data_all)[0], Operation)
     assert set_operations(fx_data_all)[0].get_operation() == fx_list_operations[0].get_operation()
     assert set_operations(fx_data_all)[1].get_operation() == fx_list_operations[1].get_operation()

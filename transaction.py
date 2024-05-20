@@ -1,5 +1,6 @@
 """
-Module with the Operation class
+en: Module with the Operation class
+ru: Модуль с классом Operation
 """
 import datetime
 import re
@@ -73,7 +74,7 @@ class Operation:
         ru: Заменить приватную область на '*'
         :param type_:
         :param string:
-        :return:
+        :return: str
         """
         if type_.startswith('Счет'):
             return f"****************{string[-4:]}"
@@ -95,22 +96,21 @@ class Operation:
         to_number = self.number_repr(data['to']['type'], data['to']['number']) if data['to'] else ''
         to = f"{data['to']['type']} {to_number}" if data['to'] else ''
         delimiter = ' -> ' if (from_ and to) else ''
+        ending_line = '\n' if (from_ or to) else ''
         #
         amount = data['amount'] if data['amount'] else 'No amount'
         currency_name = data['currency_name'] if data['currency_name'] else 'No currency'
         # create lines
-        line_1 = f"{date} {description}"
-        line_2 = f"{from_}{delimiter}{to}"
-        line_3 = f"{amount} {currency_name}"
-        lines = f"{line_1}\n{line_2}\n{line_3}\n"
+        line_1 = f"{date} {description}\n"
+        line_2 = f"{from_}{delimiter}{to}{ending_line}"
+        line_3 = f"{amount} {currency_name}\n"
+        lines = f"{line_1}{line_2}{line_3}"
         return lines
 
     def __gt__(self, other) -> bool:
         """
         en: Compare objects by date of the operation
         ru: Сравнение объектов по дате операции
-        :param other:
-        :return: bool
         """
         return self.date > other.date
 
@@ -118,7 +118,5 @@ class Operation:
         """
         en: Compare objects by date of the operation
         ru: Сравнение объектов по дате операции
-        :param other:
-        :return:  bool
         """
         return self.date < other.date

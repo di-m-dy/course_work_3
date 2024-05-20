@@ -1,4 +1,7 @@
-# Description: Utility functions for the application
+"""
+en: Description: Utility functions for the application
+ru: Описание: Вспомогательные функции для приложения
+"""
 import json
 
 import config
