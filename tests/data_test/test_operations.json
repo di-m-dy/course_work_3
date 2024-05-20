@@ -1,0 +1,69 @@
+[
+        {
+            "id": 1,
+            "state": "EXECUTED",
+            "date": "2000-01-01",
+            "operationAmount":
+                {
+                    "amount": "0.0",
+                    "currency":
+                        {
+                            "name": "Test_Name_Currency",
+                            "code": "Test_Code_Currency"
+                        }
+                },
+            "description": "Test_Description_1",
+            "from": "Card_From 0000000000000000",
+            "to": "Card_To 0000000000000000"
+        },
+        {
+            "id": 1,
+            "state": "EXECUTED",
+            "date": "2002-01-01",
+            "operationAmount":
+                {
+                    "amount": "0.0",
+                    "currency":
+                        {
+                            "name": "Test_Name_Currency",
+                            "code": "Test_Code_Currency"
+                        }
+                },
+            "description": "Test_Description_2",
+            "from": "Card_From 0000000000000000",
+            "to": "Счет_To 00000000000000000000"
+        },
+        {
+            "id": 1,
+            "state": "EXECUTED",
+            "date": "2001-01-01",
+            "operationAmount":
+                {
+                    "amount": "0.0",
+                    "currency":
+                        {
+                            "name": "Test_Name_Currency",
+                            "code": "Test_Code_Currency"
+                        }
+                },
+            "description": "Test_Description_3",
+            "to": "Счет_To 00000000000000000000"
+        },
+        {
+            "id": 1,
+            "state": "CANCELED",
+            "date": "2004-01-01",
+            "operationAmount":
+                {
+                    "amount": "0.0",
+                    "currency":
+                        {
+                            "name": "Test_Name_Currency",
+                            "code": "Test_Code_Currency"
+                        }
+                },
+            "description": "Test_Description_4",
+            "from": "Test_From 0000000000000000",
+            "to": "Test_To 00000000000000000000"
+        }
+    ]
