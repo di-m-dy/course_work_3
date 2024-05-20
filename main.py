@@ -4,11 +4,19 @@ ru: Главный модуль для запуска виджета
 """
 import utils
 import config
+import json
 
 
 def main():
     # en: Load the data / ru: Загрузить данные
-    data = utils.read_json_local(config.TEST_PATH)
+    try:
+        data = utils.read_json_local(config.DATA_PATH)
+    except FileNotFoundError:
+        print("Файл не найден")
+        exit(1)
+    except json.JSONDecodeError:
+        print("Ошибка декодирования JSON")
+        exit(1)
     # en: Set operations / ru: Установить операции
     operations = utils.set_operations(data)
     # en: Filter the data / ru: Отфильтровать данные

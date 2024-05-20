@@ -76,7 +76,7 @@ class Operation:
         :return:
         """
         if type_.startswith('Счет'):
-            return f"{string[:-4]}****"
+            return f"****************{string[-4:]}"
         string = f"{string[:6]}******{string[12:]}"
         return ' '.join([string[i:i + 4] for i in range(0, len(string), 4)])
 
